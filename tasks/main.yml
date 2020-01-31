@@ -103,6 +103,14 @@
     mode: "u=rw,g=r,o="
   register: config
 
+- name: Activate IP-forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    sysctl_set: yes
+    state: present
+    reload: yes
+
 - name: Generate client's config
   template:
     src: client.conf.j2
